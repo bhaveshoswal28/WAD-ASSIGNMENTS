@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.form{
+    width: 50%;
+    margin: 5% auto;
+}
+
+.form input{
+    padding: 10px;
+    margin-bottom: 10px;    
+}
+
+.form label{
+    font-size: 19px;
+    font-weight: 700;
+}

@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Table Generation and Multiplication</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <label for="input1">Input 1:</label>
+  <input type="text" id="input1" placeholder="Enter values like 3#3#2">
+
+  <label for="input2">Input 2:</label>
+  <input type="text" id="input2" placeholder="Enter values like 3#3#3">
+
+  <button onclick="generateTables()">Generate Tables</button>
+
+  <div id="tables"></div>
+
+  <script>
+    function generateTables() {
+      var input1 = document.getElementById('input1').value;
+      var input2 = document.getElementById('input2').value;
+
+      var table1 = generateTable(input1);
+      var table2 = generateTable(input2);
+      var table3 = null;
+
+      var values1 = input1.split('#');
+      var values2 = input2.split('#');
+      var startValue1 = parseInt(values1[2]);
+      var startValue2 = parseInt(values2[2]);
+
+      if (startValue1 !== startValue2) {
+        table3 = multiplyTables(table1, table2);
+      } else {
+        table3 = table1.cloneNode(true);
+      }
+
+      var tablesContainer = document.getElementById('tables');
+      tablesContainer.innerHTML = '';
+      tablesContainer.appendChild(table1);
+      tablesContainer.appendChild(table2);
+      tablesContainer.appendChild(table3);
+    }
+
+    function generateTable(input) {
+      var values = input.split('#');
+      var rows = parseInt(values[0]);
+      var columns = parseInt(values[1]);
+      var startValue = parseInt(values[2]);
+
+      var table = document.createElement('table');
+      for (var i = 0; i < rows; i++) {
+        var row = document.createElement('tr');
+        for (var j = 0; j < columns; j++) {
+          var cell = document.createElement('td');
+          cell.textContent = (startValue + j) * (i + 1);
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
+
+      return table;
+    }
+
+    function multiplyTables(table1, table2) {
+      var table3 = document.createElement('table');
+      var rows = table1.rows.length;
+      var columns = table1.rows[0].cells.length;
+
+      for (var i = 0; i < rows; i++) {
+        var row = document.createElement('tr');
+        for (var j = 0; j < columns; j++) {
+          var cell1 = table1.rows[i].cells[j];
+          var cell2 = table2.rows[i].cells[j];
+          var value1 = parseInt(cell1.textContent);
+          var value2 = parseInt(cell2.textContent);
+
+          var cell = document.createElement('td');
+          cell.textContent = value1 * value2;
+          row.appendChild(cell);
+        }
+        table3.appendChild(row);
+      }
+
+      return table3;
+    }
+  </script>
+</body>
+</html>

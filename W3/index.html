@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WADL_W3</title>
+
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+  </head>
+  
+  <body>
+    <div class="header">WADL_PRACTICAL W3</div>
+    <div class="content">
+      <div class="form">
+        <form action=" " method="POST">
+          <label for="username">Username :</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="form-control"
+            required
+          />
+          <label for="email">Email :</label>
+          <input 
+            type="email"
+            name="Useremail"
+            id="Useremail"
+            class="form-control"
+            required
+          />
+          <label for="password">Password :</label>
+          <input
+            type="password"
+            name="Userpass"
+            id="Userpass"
+            class="form-control"
+            required
+          />
+          <label for="Cpassword">Confirm Password :</label>
+          <input
+            type="password"
+            name="UserCpass"
+            id="UserCpass"
+            class="form-control"
+            required
+          />
+          <br />
+          <input
+            type="button"
+            onclick="submitForm()"
+            name="submit"
+            id="submit"
+            class="btn btn-primary"
+            value="SUBMIT"
+          />
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function submitForm() {
+        var username = $("input[name=username]").val();
+        var email = $("input[name=Useremail]").val();
+        var password = $("input[name=Userpass]").val();
+        var Cpassword = $("input[name=UserCpass]").val();
+
+        var formData =
+          "username=" +
+          username +
+          "&email=" +
+          email +
+          "&password=" +
+          password +
+          "&Cpassword=" +
+          Cpassword;
+
+        $.ajax({
+          type: "POST",
+          url: "./output.php",
+          data: formData,
+        }).done(function (response) {
+          var new_window = window.open(null, " ", "_blank");
+          new_window.document.write(response);
+        });
+      }
+    </script>
+  </body>
+</html>
